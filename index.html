@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SurakshaSetu AI | सुरक्षा सेतु - AI Road Safety & Family Life-Saver Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        darkCard: '#111726',
+                        darkBorder: 'rgba(255, 255, 255, 0.08)',
+                        brandRed: '#ef4444',
+                        brandAmber: '#f59e0b',
+                        brandEmerald: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2canvas for Certificate Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Canvas Confetti for Pledge -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen selection:bg-red-500 selection:text-white">
+
+    <!-- Top Emergency Announcement Bar -->
+    <div class="bg-gradient-to-r from-red-950 via-red-900 to-red-950 border-b border-red-800/40 py-2 px-4 text-xs md:text-sm text-center font-medium text-red-200 flex items-center justify-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-600 text-white font-bold text-xs uppercase animate-pulse">
+            <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i> Reality Alert
+        </span>
+        <span id="topBarText">
+            Har 24 second me duniya me 1 insaan sadak par mar raha hai. 71% log parivaar ke akele kamane wale hote hain.
+        </span>
+        <button id="langToggleBtn" class="ml-3 px-2.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-white font-semibold transition flex items-center gap-1 text-xs">
+            <i data-lucide="languages" class="w-3 h-3"></i> <span id="langBtnText">Switch to English</span>
+        </button>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-red-600 via-amber-500 to-red-700 p-0.5 flex items-center justify-center shadow-lg shadow-red-600/30">
+                        <div class="w-full h-full bg-darkBg rounded-[10px] flex items-center justify-center">
+                            <i data-lucide="shield-alert" class="w-6 h-6 text-red-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-extrabold text-xl tracking-tight text-white">Suraksha<span class="text-red-500">Setu</span> <span class="text-xs px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">AI</span></span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 font-hindi">सुरक्षा सेतु - जीवन और परिवार का रक्षक</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#voice-guardian" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="bell-ring" class="w-4 h-4 text-red-500 animate-pulse"></i> <span data-i18n="nav_alarm">Voice Alarm & Watch</span></a>
+                    <a href="#ai-guardian" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="bot" class="w-4 h-4 text-amber-500"></i> <span data-i18n="nav_ai">Rakshak AI</span></a>
+                    <a href="#vision-scanner" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="scan" class="w-4 h-4 text-blue-400"></i> <span data-i18n="nav_scanner">AI Vision Scanner</span></a>
+                    <a href="#stats-ratios" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-400"></i> <span data-i18n="nav_stats">Mortality Data</span></a>
+                    <a href="#family-calculator" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="calculator" class="w-4 h-4 text-amber-400"></i> <span data-i18n="nav_calc">Family Calculator</span></a>
+                    <a href="#stories-wall" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="heart-crack" class="w-4 h-4 text-red-400"></i> <span data-i18n="nav_stories">Real Stories</span></a>
+                    <a href="#pledge-section" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="award" class="w-4 h-4 text-purple-400"></i> <span data-i18n="nav_pledge">Pledge</span></a>
+                    <a href="#gov-accountability" class="hover:text-red-400 transition flex items-center gap-1.5"><i data-lucide="landmark" class="w-4 h-4 text-slate-400"></i> <span data-i18n="nav_action">Policy</span></a>
+                </div>
+
+                <!-- Emergency SOS Trigger Button -->
+                <div class="flex items-center gap-3">
+                    <button id="openSosModalBtn" class="px-3.5 py-2 rounded-xl bg-red-600/20 hover:bg-red-600 border border-red-500/50 text-red-400 hover:text-white transition flex items-center gap-2 text-xs md:text-sm font-bold shadow-lg shadow-red-950">
+                        <i data-lucide="phone-call" class="w-4 h-4 animate-bounce"></i>
+                        <span>SOS Helplines</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION: The Emotional Reality & Live Ticking Death Clocks -->
+    <header class="relative pt-12 pb-20 overflow-hidden">
+        <!-- Ambient lighting background -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-red-600/10 blur-[140px] pointer-events-none rounded-full"></div>
+        <div class="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-amber-500/10 blur-[130px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto space-y-6">
+                <!-- Tagline Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs md:text-sm font-semibold">
+                    <div class="traffic-indicator">
+                        <span class="traffic-bulb red"></span>
+                        <span class="traffic-bulb amber"></span>
+                        <span class="traffic-bulb green"></span>
+                    </div>
+                    <span data-i18n="hero_badge">Road Safety Is Family Survival • सड़क सुरक्षा कोई मज़ाक नहीं</span>
+                </div>
+
+                <!-- Emotional Main Heading -->
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    <span data-i18n="hero_title_1">Ghar Par Koi Intezaar Kar Raha Hai.</span> <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-400 to-red-400" data-i18n="hero_title_2">
+                        Rules Follow Karo Apne Parivaar Ke Liye.
+                    </span>
+                </h1>
+
+                <p class="text-base sm:text-xl text-slate-300 leading-relaxed font-light" data-i18n="hero_subtitle">
+                    Jab ek insaan bina helmet, tez raftaar ya red light todkar jaan gawa baithta hai, to sirf ek shakhs nahi marta — uska poora parivaar anaath ho jata hai, bacche school chhodkar roti ke mohtaj ho jate hain.
+                </p>
+
+                <!-- Voice Readout Bar -->
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button id="voiceNarrateBtn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold flex items-center gap-2 shadow-lg shadow-red-700/30 transition transform hover:-translate-y-0.5">
+                        <i data-lucide="volume-2" class="w-5 h-5"></i>
+                        <span id="voiceNarrateText">Suno Ye Sandesh (Listen in Hindi)</span>
+                    </button>
+                    <a href="#ai-guardian" class="px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-white/10 text-slate-200 font-semibold flex items-center gap-2 transition">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
+                        <span data-i18n="cta_ai_agent">Test Violations in Rakshak AI</span>
+                    </a>
+                    <a href="#family-calculator" class="px-5 py-3 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-500/40 text-emerald-300 font-semibold flex items-center gap-2 transition">
+                        <i data-lucide="calculator" class="w-5 h-5 text-emerald-400"></i>
+                        <span data-i18n="cta_calc">Calculate Family Risk</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- LIVE CRITICAL STATS TICKER TILES -->
+            <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Tile 1: Global Deaths This Year -->
+                <div class="glass-card rounded-2xl p-5 border border-white/10 relative overflow-hidden">
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                        <span class="flex items-center gap-1.5"><i data-lucide="globe" class="w-3.5 h-3.5 text-blue-400"></i> <span data-i18n="stat_card_1_title">Global Road Deaths (2026 Pace)</span></span>
+                        <span class="w-2 h-2 rounded-full bg-red-500 pulse-dot"></span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-red-400 stat-ticker" id="globalDeathsCounter">1,190,000</div>
+                    <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="stat_card_1_desc">~3,260 lives lost everyday globally (~1 death every 24s)</p>
+                </div>
+
+                <!-- Tile 2: India Deaths Per Day -->
+                <div class="glass-card rounded-2xl p-5 border border-red-500/20 relative overflow-hidden emergency-pulse">
+                    <div class="flex items-center justify-between text-xs text-red-300 mb-2">
+                        <span class="flex items-center gap-1.5"><i data-lucide="flame" class="w-3.5 h-3.5 text-red-500"></i> <span data-i18n="stat_card_2_title">India Lives Lost Daily</span></span>
+                        <span class="px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 text-[10px] font-bold">MoRTH Data</span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white stat-ticker">462 <span class="text-sm font-normal text-slate-400">/ day</span></div>
+                    <p class="text-xs text-slate-300 mt-2 font-medium" data-i18n="stat_card_2_desc">19 deaths every single hour (1 life lost every 3 minutes)</p>
+                </div>
+
+                <!-- Tile 3: Sole Breadwinners Lost -->
+                <div class="glass-card rounded-2xl p-5 border border-white/10 relative overflow-hidden">
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                        <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-3.5 h-3.5 text-amber-400"></i> <span data-i18n="stat_card_3_title">Sole Breadwinners Lost</span></span>
+                        <span class="text-amber-400 text-xs font-bold">71.2%</span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-amber-400 stat-ticker">18–45 <span class="text-sm font-normal text-slate-400">Yrs Age</span></div>
+                    <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="stat_card_3_desc">Young earning fathers, mothers, sons & daughters</p>
+                </div>
+
+                <!-- Tile 4: Deaths Since Opened Page -->
+                <div class="glass-card rounded-2xl p-5 border border-emerald-500/30 relative overflow-hidden">
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                        <span class="flex items-center gap-1.5"><i data-lucide="timer" class="w-3.5 h-3.5 text-emerald-400"></i> <span data-i18n="stat_card_4_title">Lives Lost Since You Arrived</span></span>
+                        <span class="text-xs text-emerald-400 font-mono" id="timeOnPage">00:00</span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-emerald-400 stat-ticker" id="deathsSinceOpened">0</div>
+                    <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="stat_card_4_desc">World loses 1 soul every 24 seconds to traffic crashes</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 0: PROACTIVE VOICE ALARM & SMARTWATCH LIFE-SAVER GUARDIAN -->
+    <section id="voice-guardian" class="py-16 border-t border-white/5 relative bg-gradient-to-b from-darkBg via-red-950/20 to-darkBg overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="bell-ring" class="w-4 h-4 text-red-500 animate-pulse"></i> Proactive Pre-Violation Guardian
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="alarm_sec_title">
+                    Rule Todne Se Pehle Hi Bajega Mobile & Smartwatch Alarm
+                </h2>
+                <p class="text-sm sm:text-base text-slate-300 mt-2" data-i18n="alarm_sec_desc">
+                    Jaise hi aap red light ke paas pahuchenge, ya speed 60 se upar jayegi, ya phone uthayenge — yeh AI siren aur maa/bacche ki awaaz me chilla kar aapko rokega. Agar phone discharge ho jaye, to smartwatch par tez vibration aur alarm turant chalu ho jayega.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Mobile Driving Guardian (7 Cols) -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between relative transition duration-300" id="drivingGuardianPanel">
+                    <div>
+                        <!-- Header with GPS status and Voice selector -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 pb-5 border-b border-white/10">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" id="gpsIndicatorDot"></span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-200" id="drivingStatusLabel">
+                                    Guardian Standby (ड्राइविंग सुरक्षा तैयार)
+                                </span>
+                            </div>
+
+                            <!-- Voice Persona Picker -->
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="text-slate-400 font-medium">Alert Voice:</span>
+                                <select id="alertVoicePersona" class="bg-slate-900 border border-pink-500/40 rounded-lg px-2.5 py-1 text-pink-300 text-xs font-bold focus:outline-none focus:border-pink-500">
+                                    <option value="child" selected>👶 Child's Voice (मासूम बच्चे की पुकार)</option>
+                                    <option value="mother">👵 Mother's Voice (मां का लाड़ व चिंता)</option>
+                                    <option value="police">🚨 Police & Siren (कड़क पुलिस व सायरन)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Live Speedometer HUD -->
+                        <div class="py-6 flex flex-col items-center justify-center text-center">
+                            <div class="relative w-48 h-48 rounded-full border-4 border-slate-800 flex flex-col items-center justify-center transition duration-300" id="speedometerDial">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Current Speed</span>
+                                <div class="text-6xl font-black text-white stat-ticker my-1" id="liveSpeedText">0</div>
+                                <span class="text-xs font-bold text-slate-400">KM / H</span>
+
+                                <!-- Speed Status Pill -->
+                                <span class="mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" id="speedStatusPill">
+                                    SAFE SPEED
+                                </span>
+                            </div>
+
+                            <!-- Speed Simulation Slider -->
+                            <div class="w-full max-w-md mt-6">
+                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
+                                    <span>Adjust Speed Slider (Test Over-Speed):</span>
+                                    <span id="sliderSpeedVal" class="text-amber-400 font-mono">0 km/h</span>
+                                </div>
+                                <input type="range" id="speedSimulatorRange" min="0" max="120" value="0" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-[11px] text-slate-500 mt-1">
+                                    <span>0 (Idle)</span>
+                                    <span class="text-emerald-400">40 (Safe)</span>
+                                    <span class="text-amber-400">60 (Limit)</span>
+                                    <span class="text-red-500 font-bold">80+ (LETHAL)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DEDICATED CHILD VOICE SAFETY CARD (मासूम बच्चे की पुकार) -->
+                        <div class="mt-2 p-4 rounded-xl bg-gradient-to-r from-pink-950/40 via-red-950/30 to-amber-950/40 border border-pink-500/30 space-y-3">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-2xl">👶</span>
+                                    <div>
+                                        <h4 class="text-xs font-black text-pink-300 uppercase tracking-wider flex items-center gap-1.5">
+                                            <span>Nanhe Haath, Badi Pukaar</span>
+                                            <span class="px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 text-[10px] font-bold">Child Voice Special</span>
+                                        </h4>
+                                        <p class="text-[11px] text-slate-300">Apne bacche ka naam likhein — AI unki masoom awaaz me chilla kar aapko bachayega:</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-1.5 text-xs">
+                                    <label class="text-[11px] text-slate-400">Bacche Ka Naam:</label>
+                                    <input type="text" id="childNameInput" value="Aarohi" class="bg-slate-900 border border-pink-500/50 rounded-lg px-2.5 py-1 text-xs text-pink-300 font-extrabold w-28 text-center focus:outline-none focus:border-pink-400 shadow-sm" placeholder="e.g. Aarav">
+                                </div>
+                            </div>
+
+                            <!-- 5 Heartfelt Child Pleas Buttons -->
+                            <div class="flex flex-wrap gap-2 pt-1">
+                                <button class="child-plea-btn px-3 py-1.5 rounded-lg bg-pink-500/20 hover:bg-pink-500 text-pink-200 hover:text-black border border-pink-500/40 text-xs font-bold flex items-center gap-1.5 transition" data-plea="speed">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5 text-pink-400"></i> "Papa, gaadi tez mat chalao!"
+                                </button>
+                                <button class="child-plea-btn px-3 py-1.5 rounded-lg bg-pink-500/20 hover:bg-pink-500 text-pink-200 hover:text-black border border-pink-500/40 text-xs font-bold flex items-center gap-1.5 transition" data-plea="helmet">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5 text-pink-400"></i> "Papa, helmet pehan lo!"
+                                </button>
+                                <button class="child-plea-btn px-3 py-1.5 rounded-lg bg-pink-500/20 hover:bg-pink-500 text-pink-200 hover:text-black border border-pink-500/40 text-xs font-bold flex items-center gap-1.5 transition" data-plea="redlight">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5 text-pink-400"></i> "Papa, red light mat todo!"
+                                </button>
+                                <button class="child-plea-btn px-3 py-1.5 rounded-lg bg-pink-500/20 hover:bg-pink-500 text-pink-200 hover:text-black border border-pink-500/40 text-xs font-bold flex items-center gap-1.5 transition" data-plea="phone">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5 text-pink-400"></i> "Papa, phone niche rakho!"
+                                </button>
+                                <button class="child-plea-btn px-3 py-1.5 rounded-lg bg-red-600/30 hover:bg-red-600 text-red-200 hover:text-white border border-red-500/50 text-xs font-extrabold flex items-center gap-1.5 transition shadow-lg shadow-red-950" data-plea="emotional">
+                                    <i data-lucide="heart" class="w-3.5 h-3.5 text-pink-400"></i> "Papa, ghar zinda laut aana!"
+                                </button>
+                            </div>
+
+                            <!-- Live Hindi Audio Status & Test Button -->
+                            <div class="pt-2.5 border-t border-pink-500/20 flex flex-wrap items-center justify-between gap-2">
+                                <div class="flex items-center gap-1.5 text-[11px] text-pink-300">
+                                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+                                    <span>Hindi Voice Engine: <strong id="detectedHindiVoiceBadge" class="text-white bg-slate-900/80 px-2 py-0.5 rounded border border-white/10 font-mono text-[10px]">Initializing...</strong></span>
+                                </div>
+                                <button id="testChildVoiceBtn" class="px-3 py-1.5 rounded-lg bg-pink-600 hover:bg-pink-500 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md shadow-pink-900/50 transition transform hover:-translate-y-0.5">
+                                    <i data-lucide="play-circle" class="w-4 h-4 text-white"></i> <span>Play Hindi Voice Test (हिंदी आवाज़ सुनें)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- One-Click Pre-Violation Test Triggers -->
+                        <div class="mt-4 pt-4 border-t border-white/5">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                                Test Voice Alarm Scenarios (Click to Listen Immediate Loud Siren & Voice):
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                <button id="triggerSpeedAlarmBtn" class="py-2.5 px-3 rounded-xl bg-red-600/20 hover:bg-red-600 border border-red-500/40 text-red-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                                    <i data-lucide="gauge" class="w-3.5 h-3.5"></i>
+                                    <span>Speed >60 Alarm</span>
+                                </button>
+
+                                <button id="triggerRedLightAlarmBtn" class="py-2.5 px-3 rounded-xl bg-amber-600/20 hover:bg-amber-600 border border-amber-500/40 text-amber-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                                    <i data-lucide="traffic-cone" class="w-3.5 h-3.5"></i>
+                                    <span>Red Light in 50m</span>
+                                </button>
+
+                                <button id="triggerPhoneAlarmBtn" class="py-2.5 px-3 rounded-xl bg-purple-600/20 hover:bg-purple-600 border border-purple-500/40 text-purple-300 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition">
+                                    <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+                                    <span>Phone Pickup Alert</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Controls: GPS Tracking & Silence -->
+                    <div class="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                        <button id="toggleGpsDrivingBtn" class="py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-emerald-900/30 transition">
+                            <i data-lucide="navigation" class="w-4 h-4"></i>
+                            <span id="gpsBtnText">Start Real GPS Driving Guardian</span>
+                        </button>
+
+                        <button id="silenceAlarmBtn" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-300 font-bold text-xs flex items-center gap-2 transition">
+                            <i data-lucide="volume-x" class="w-4 h-4 text-red-400"></i>
+                            <span>Stop Siren / Silence</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Smartwatch Companion & Low Battery Backup (5 Cols) -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 flex flex-col items-center justify-between relative">
+                    <div class="w-full text-center pb-4 border-b border-white/10">
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[11px] font-bold uppercase tracking-wider">
+                            Phone Discharge Backup
+                        </span>
+                        <h3 class="text-base font-extrabold text-white mt-1">Smartwatch Haptic Sync</h3>
+                        <p class="text-xs text-slate-400 mt-1">
+                            Agar phone ki battery dead ho jaye, to smartwatch aapki kalai (wrist) par tez vibration aur buzzer se alert karegi.
+                        </p>
+                    </div>
+
+                    <!-- Realistic Smartwatch Chassis Simulation -->
+                    <div class="my-6 relative flex items-center justify-center">
+                        <div class="vibration-rings" id="smartwatchRipples"></div>
+                        <div class="smartwatch-chassis" id="smartwatchDevice">
+                            <div class="smartwatch-crown"></div>
+                            <div class="smartwatch-screen">
+                                <!-- Watch Status Bar -->
+                                <div class="flex items-center justify-between text-[10px] text-slate-400 px-1 font-mono">
+                                    <span id="watchTime">09:25</span>
+                                    <div class="flex items-center gap-1">
+                                        <i data-lucide="heart" class="w-3 h-3 text-red-500 animate-pulse"></i>
+                                        <span id="watchBpm">78</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <i data-lucide="battery-charging" class="w-3.5 h-3.5 text-emerald-400" id="watchBatteryIcon"></i>
+                                        <span id="watchBatteryText">85%</span>
+                                    </div>
+                                </div>
+
+                                <!-- Center Watch Screen Message -->
+                                <div class="text-center py-2 px-1 flex flex-col items-center justify-center">
+                                    <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-1.5" id="watchStatusIcon">
+                                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="text-[11px] font-black text-white leading-tight uppercase" id="watchAlertHeading">
+                                        Suraksha Linked
+                                    </div>
+                                    <div class="text-[9px] text-slate-400 mt-1 font-mono" id="watchAlertSub">
+                                        Speed: 0 km/h • Safe
+                                    </div>
+                                </div>
+
+                                <!-- Watch Bottom Haptic Pill -->
+                                <div class="bg-slate-900/90 rounded-full py-1 px-2 text-center border border-white/5 text-[9px] text-slate-300 flex items-center justify-center gap-1">
+                                    <i data-lucide="activity" class="w-3 h-3 text-amber-400"></i>
+                                    <span id="watchHapticLabel">Wrist Haptics: Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smartwatch Pairing & Low Battery Simulation Controls -->
+                    <div class="w-full space-y-3">
+                        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="bluetooth" class="w-4 h-4 text-blue-400"></i>
+                                <span class="text-slate-300 font-medium" id="watchPairingStatus">Smartwatch: Paired (BLE Connected)</span>
+                            </div>
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button id="simulateLowBatteryBtn" class="py-2 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black border border-amber-500/40 font-bold transition flex items-center justify-center gap-1.5">
+                                <i data-lucide="battery-low" class="w-3.5 h-3.5"></i>
+                                <span>Phone Low Battery (12%)</span>
+                            </button>
+
+                            <button id="testWatchVibrationBtn" class="py-2 px-3 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 font-bold transition flex items-center justify-center gap-1.5">
+                                <i data-lucide="vibrate" class="w-3.5 h-3.5"></i>
+                                <span>Test Wrist Vibrate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: RAKSHAK AI (The Intelligent Traffic Rules & Crash Impact Agent) -->
+    <section id="ai-guardian" class="py-16 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-wider mb-2">
+                        <i data-lucide="brain-circuit" class="w-4 h-4"></i> Intelligent Traffic Guardian
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="ai_sec_title">
+                        Rakshak AI: Violation, Physics & Destitution Analyzer
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-400 max-w-2xl mt-1" data-i18n="ai_sec_desc">
+                        Select a common mistake or describe any driving habit. Rakshak AI breaks down the legal penalty, the biomechanical crash physics, and the catastrophic collapse your family will face.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">AI Model:</span>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300 flex items-center gap-1">
+                        <i data-lucide="zap" class="w-3 h-3 text-amber-400"></i> Rakshak Neural Engine v2.4
+                    </span>
+                </div>
+            </div>
+
+            <!-- Quick Presets -->
+            <div class="mb-6">
+                <p class="text-xs uppercase text-slate-400 font-bold tracking-wider mb-3" data-i18n="quick_scenarios_label">Quick Test Scenarios (Click Any):</p>
+                <div class="flex flex-wrap gap-2.5" id="scenarioPresetsContainer">
+                    <!-- Dynamic Preset Buttons Populated by JS -->
+                </div>
+            </div>
+
+            <!-- AI Interface Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Input Box (Left 5 Cols) -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <label for="aiUserInput" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2 flex items-center justify-between">
+                            <span data-i18n="input_label">Describe Traffic Action / Habit</span>
+                            <span class="text-slate-500 text-[11px] font-normal">Hindi or English</span>
+                        </label>
+                        <textarea id="aiUserInput" rows="5" class="w-full bg-slate-900/90 border border-white/10 rounded-xl p-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-500 transition resize-none" placeholder="e.g. Main bike bina helmet ke 60 km/h pe chala raha tha aur jaldi me red light cross kar di..."></textarea>
+
+                        <div class="mt-4 grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-[11px] text-slate-400 font-semibold block mb-1">Vehicle Type</label>
+                                <select id="aiVehicleType" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-xs text-slate-200">
+                                    <option value="Two-Wheeler (Bike/Scooter)">Motorcycle / Scooter</option>
+                                    <option value="Four-Wheeler (Car/Taxi)">Car / Cab / SUV</option>
+                                    <option value="Commercial Truck / Bus">Commercial / Bus</option>
+                                    <option value="Auto-Rickshaw">Auto-Rickshaw / E-Rickshaw</option>
+                                    <option value="Pedestrian / Cyclist">Pedestrian / Cyclist</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-slate-400 font-semibold block mb-1">Speed Range</label>
+                                <select id="aiSpeedRange" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-xs text-slate-200">
+                                    <option value="40-60 km/h">40 - 60 km/h (City Speed)</option>
+                                    <option value="60-80 km/h">60 - 80 km/h (High Speed)</option>
+                                    <option value="80-120+ km/h">80 - 120+ km/h (Expressway Lethal)</option>
+                                    <option value="< 30 km/h">&lt; 30 km/h (Congested)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+                        <button id="analyzeHabitBtn" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 transition">
+                            <i data-lucide="cpu" class="w-4 h-4"></i>
+                            <span data-i18n="btn_analyze">Analyze Consequences with AI</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Output Screen (Right 7 Cols) -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-6 border border-white/10 relative" id="aiOutputContainer">
+                    <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300" data-i18n="ai_report_heading">Rakshak AI Risk & Destitution Diagnosis</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="speakAiReportBtn" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs text-slate-300 hover:text-white flex items-center gap-1 transition">
+                                <i data-lucide="volume-2" class="w-3.5 h-3.5 text-amber-400"></i>
+                                <span>Voice Readout</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Report Dynamic Body -->
+                    <div id="aiReportCard" class="mt-5 space-y-4">
+                        <!-- Default placeholder state will be replaced upon analysis -->
+                        <div class="text-center py-10 text-slate-400">
+                            <i data-lucide="shield-question" class="w-12 h-12 text-slate-600 mx-auto mb-3"></i>
+                            <p class="text-sm font-medium" data-i18n="placeholder_msg">Select a preset above or type your habit to run the AI Road Safety & Destitution Diagnosis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: AI COMPUTER VISION SCANNER SIMULATION -->
+    <section id="vision-scanner" class="py-16 bg-slate-950/40 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="eye" class="w-4 h-4"></i> Automated Vision Intelligence
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="vision_title">
+                    AI Visual Violation Scanner
+                </h2>
+                <p class="text-sm text-slate-400 mt-2" data-i18n="vision_desc">
+                    Modern AI cameras across highways detect life-threatening violations in milliseconds. Test sample images or upload any photo to see how AI detects danger and quantifies family risk.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Visual Box (7 Cols) -->
+                <div class="lg:col-span-7 glass-panel rounded-2xl p-5 border border-white/10">
+                    <div class="relative rounded-xl overflow-hidden bg-slate-900 border border-white/10 min-h-[340px] flex items-center justify-center" id="scannerViewport">
+                        <img id="scannerImage" src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80" alt="Traffic Situation" class="w-full h-[360px] object-cover rounded-xl transition duration-500">
+                        
+                        <!-- Simulated AI Bounding Box Overlays -->
+                        <div id="scannerOverlayContainer"></div>
+
+                        <!-- Scan Line Animation -->
+                        <div id="scannerLaser" class="absolute inset-x-0 h-1 bg-red-500/80 shadow-[0_0_15px_#ef4444] opacity-0 transition"></div>
+                    </div>
+
+                    <!-- Preset Selector -->
+                    <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex flex-wrap gap-2">
+                            <button class="vision-preset-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition active-preset" data-preset="helmet">
+                                🏍️ Rider Without Helmet
+                            </button>
+                            <button class="vision-preset-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition" data-preset="phone">
+                                📱 Phone While Driving
+                            </button>
+                            <button class="vision-preset-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition" data-preset="seatbelt">
+                                🚗 Unbuckled Driver
+                            </button>
+                            <button class="vision-preset-btn px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition" data-preset="triple">
+                                👥 Triple Riding
+                            </button>
+                        </div>
+
+                        <label class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-white/20 text-xs text-slate-300 font-semibold cursor-pointer flex items-center gap-1.5">
+                            <i data-lucide="upload" class="w-3.5 h-3.5"></i> Upload Photo
+                            <input type="file" id="imageUploadInput" accept="image/*" class="hidden">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Detection Summary (5 Cols) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-card rounded-2xl p-6 border border-white/10">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <i data-lucide="scan-line" class="w-4 h-4 text-red-500"></i>
+                                <span data-i18n="vision_report_title">AI Optical Diagnosis</span>
+                            </h3>
+                            <span id="visionDangerBadge" class="px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold">
+                                94% FATALITY RISK
+                            </span>
+                        </div>
+
+                        <div class="space-y-3.5 text-xs">
+                            <div>
+                                <span class="text-slate-400 block font-medium">Primary Violation Identified:</span>
+                                <span id="visionViolationName" class="text-sm font-bold text-slate-100">Rider Without Certified Helmet (Head Trauma Risk)</span>
+                            </div>
+
+                            <div>
+                                <span class="text-slate-400 block font-medium">Legal Penalties (MV Act 2019):</span>
+                                <span id="visionPenaltyText" class="text-amber-400 font-semibold">Section 129: ₹1,000 Fine + 3 Months License Disqualification</span>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-red-950/40 border border-red-500/30">
+                                <span class="text-red-400 font-bold block mb-1 flex items-center gap-1.5">
+                                    <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i> Biomechanical Reality:
+                                </span>
+                                <p id="visionPhysicsText" class="text-slate-300 leading-relaxed">
+                                    In a collision at 50 km/h, the rider's bare skull strikes the tarmac with over 4,000 N of force. Basal skull fracture occurs within 12 milliseconds. 80% chance of brain death before ambulance arrival.
+                                </p>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/30">
+                                <span class="text-amber-400 font-bold block mb-1 flex items-center gap-1.5">
+                                    <i data-lucide="heart" class="w-3.5 h-3.5"></i> The Family Aftermath:
+                                </span>
+                                <p id="visionFamilyText" class="text-slate-300 leading-relaxed">
+                                    If this rider is the sole earner, their children face immediate school dropout, and parents face lifetime debt for hospital ICU bills.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button id="rescanBtn" class="mt-4 w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 flex items-center justify-center gap-2 transition">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Re-Scan Image with AI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: WORLD & INDIA MORTALITY RATIO DASHBOARD (Statistical Reality) -->
+    <section id="stats-ratios" class="py-16 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="pie-chart" class="w-4 h-4"></i> World Health Organization & MoRTH Benchmark
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="stats_title">
+                    The Global Road Carnage: Numbers That Break Families
+                </h2>
+                <p class="text-sm text-slate-400 mt-2" data-i18n="stats_desc">
+                    These are not just statistics — every single number represents a mother crying by an empty dinner plate, a child whose school bag was abandoned, and parents left helpless in old age.
+                </p>
+            </div>
+
+            <!-- 4 Critical Reality Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <!-- Ratio 1 -->
+                <div class="glass-card rounded-2xl p-5 border border-white/10">
+                    <div class="text-red-500 text-2xl font-black mb-1">1 in 24 Sec</div>
+                    <div class="text-sm font-bold text-white mb-2">Global Fatality Frequency</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Every 24 seconds, someone loses their life on the world's roads — equating to 3 jumbo jets crashing every single day without survivors.
+                    </p>
+                </div>
+
+                <!-- Ratio 2 -->
+                <div class="glass-card rounded-2xl p-5 border border-white/10">
+                    <div class="text-amber-500 text-2xl font-black mb-1">71.2%</div>
+                    <div class="text-sm font-bold text-white mb-2">Young Breadwinners (18-45)</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Over 7 out of 10 people who die are in their prime earning years, leaving dependent children and frail parents financially crippled.
+                    </p>
+                </div>
+
+                <!-- Ratio 3 -->
+                <div class="glass-card rounded-2xl p-5 border border-white/10">
+                    <div class="text-blue-400 text-2xl font-black mb-1">92%</div>
+                    <div class="text-sm font-bold text-white mb-2">Developing Countries Burden</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Low and middle-income nations possess only 60% of the world's vehicles, yet suffer 92% of all global road crash fatalities.
+                    </p>
+                </div>
+
+                <!-- Ratio 4 -->
+                <div class="glass-card rounded-2xl p-5 border border-white/10">
+                    <div class="text-emerald-400 text-2xl font-black mb-1">32.7%</div>
+                    <div class="text-sm font-bold text-white mb-2">Poverty Trap Rate</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Nearly 33% of victim families report plummeting directly below the poverty line after losing their sole earning member to a crash.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Top Rule Violations Causing Fatal Crashes -->
+                <div class="glass-panel rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="bar-chart-2" class="w-4 h-4 text-red-400"></i>
+                            <span data-i18n="chart_1_title">Top Rule Violations Leading to Death</span>
+                        </h3>
+                        <span class="text-[11px] text-slate-400">Official Data</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="violationsChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-3 text-center">
+                        <strong class="text-red-400">Over-speeding</strong> accounts for 71.8% of road deaths, while <strong class="text-amber-400">Helmet non-compliance</strong> accounts for over 50,000 deaths annually in India alone.
+                    </p>
+                </div>
+
+                <!-- Chart 2: Who Dies on the Road? (Vulnerable Users) -->
+                <div class="glass-panel rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="w-4 h-4 text-amber-400"></i>
+                            <span data-i18n="chart_2_title">Fatalities by Road User Category</span>
+                        </h3>
+                        <span class="text-[11px] text-slate-400">WHO Status Report</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="usersShareChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-3 text-center">
+                        Two-wheelers and pedestrians constitute over <strong class="text-white">54%</strong> of all road deaths. The most vulnerable commuters pay the heaviest price for reckless drivers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FAMILY VULNERABILITY & DESTITUTION CALCULATOR -->
+    <section id="family-calculator" class="py-16 bg-slate-950/60 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="calculator" class="w-4 h-4"></i> The True Cost of Carelessness
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="calc_title">
+                    Family Destitution Risk Calculator (परिवार सुरक्षा कैलकुलेटर)
+                </h2>
+                <p class="text-sm text-slate-400 mt-2" data-i18n="calc_desc">
+                    If an accident takes you away today because you didn't wear a helmet or jumped a red light, how long can your family survive before hunger and debt crush them? Enter your details honestly.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Inputs (6 Cols) -->
+                <div class="lg:col-span-6 glass-panel rounded-2xl p-6 border border-white/10 space-y-5 flex flex-col justify-between">
+                    <div>
+                        <!-- Question 1: Sole Breadwinner -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                1. Are you the sole or primary earning member of your house?
+                            </label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" class="calc-sole-btn py-2.5 px-3 rounded-xl border border-red-500/50 bg-red-500/20 text-white font-bold text-xs transition active" data-val="yes">
+                                    Yes, Sole Breadwinner (हाँ, अकेला कमाने वाला)
+                                </button>
+                                <button type="button" class="calc-sole-btn py-2.5 px-3 rounded-xl border border-white/10 bg-slate-900 text-slate-300 text-xs transition" data-val="shared">
+                                    Shared / Multiple Earners (साझा आय)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Question 2: Dependents Count -->
+                        <div class="mt-4">
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                <span>2. Number of Dependent Family Members:</span>
+                                <span id="dependentsVal" class="text-emerald-400 font-extrabold text-sm">3 Members</span>
+                            </div>
+                            <input type="range" id="dependentsRange" min="1" max="8" value="3" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-[11px] text-slate-500 mt-1">
+                                <span>1 (Spouse / Parent)</span>
+                                <span>4</span>
+                                <span>8+ (Large Joint Family)</span>
+                            </div>
+                        </div>
+
+                        <!-- Question 3: Monthly Expenses -->
+                        <div class="mt-4">
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                <span>3. Monthly Family Expense (Rent, Food, School, Meds):</span>
+                                <span id="expenseVal" class="text-amber-400 font-extrabold text-sm">₹35,000 / mo</span>
+                            </div>
+                            <input type="range" id="expenseRange" min="10000" max="150000" step="5000" value="35000" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-[11px] text-slate-500 mt-1">
+                                <span>₹10,000</span>
+                                <span>₹75,000</span>
+                                <span>₹1,50,000+</span>
+                            </div>
+                        </div>
+
+                        <!-- Question 4: Emergency Savings Buffer -->
+                        <div class="mt-4">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                4. Emergency Savings or Term Insurance Available for Family:
+                            </label>
+                            <select id="savingsBuffer" class="w-full bg-slate-900 border border-white/10 rounded-xl p-2.5 text-xs text-slate-200">
+                                <option value="zero">Zero Savings / Hand-to-Mouth (एक रुपया बचत नहीं)</option>
+                                <option value="low" selected>Less than 3 Months Expenses (1-3 महीने का गुजारा)</option>
+                                <option value="med">6 to 12 Months Savings</option>
+                                <option value="high">Adequate Life Insurance (&gt; ₹50 Lakhs)</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 5: Road Habits -->
+                        <div class="mt-4">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                                5. Your Daily Risky Road Habits (Check All That Apply):
+                            </label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-white/5 cursor-pointer">
+                                    <input type="checkbox" class="habit-check accent-red-500" value="helmet" checked>
+                                    <span>Sometimes skip helmet / seatbelt</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-white/5 cursor-pointer">
+                                    <input type="checkbox" class="habit-check accent-red-500" value="speed" checked>
+                                    <span>Speed >60 km/h in city</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-white/5 cursor-pointer">
+                                    <input type="checkbox" class="habit-check accent-red-500" value="phone">
+                                    <span>Check calls / text while riding</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900 border border-white/5 cursor-pointer">
+                                    <input type="checkbox" class="habit-check accent-red-500" value="light">
+                                    <span>Jump yellow / red light when late</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="recalcRiskBtn" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30 transition">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Recalculate Family Threat Index
+                    </button>
+                </div>
+
+                <!-- Outputs Card (6 Cols) -->
+                <div class="lg:col-span-6 glass-card rounded-2xl p-6 border border-red-500/30 flex flex-col justify-between relative overflow-hidden" id="calcResultsCard">
+                    <!-- Danger Level Banner -->
+                    <div>
+                        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Family Vulnerability Report</span>
+                            <span id="riskSeverityTag" class="px-3 py-1 rounded-full bg-red-600 text-white font-extrabold text-xs">
+                                91% CRITICAL CATASTROPHE
+                            </span>
+                        </div>
+
+                        <!-- Big Meter -->
+                        <div class="my-6 text-center">
+                            <div class="text-5xl font-black text-red-500 mb-1" id="runwayMonths">1.5 Months</div>
+                            <p class="text-sm font-semibold text-slate-200" id="runwaySummary">
+                                Total time your family can survive before running out of food money
+                            </p>
+                        </div>
+
+                        <!-- Impact Cards -->
+                        <div class="space-y-3">
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-3">
+                                <i data-lucide="utensils" class="w-5 h-5 text-amber-500 shrink-0 mt-0.5"></i>
+                                <div class="text-xs">
+                                    <span class="font-bold text-slate-200 block">Food & Basic Survival Security:</span>
+                                    <span id="foodImpactDesc" class="text-slate-400">Within 45 days, savings will deplete. With no earner, family will be forced to seek charity or skip meals.</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-3">
+                                <i data-lucide="graduation-cap" class="w-5 h-5 text-blue-400 shrink-0 mt-0.5"></i>
+                                <div class="text-xs">
+                                    <span class="font-bold text-slate-200 block">Children's Education Impact:</span>
+                                    <span id="eduImpactDesc" class="text-slate-400">Private school tuition stops. High risk of child labor to cover basic household needs.</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-3">
+                                <i data-lucide="coins" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
+                                <div class="text-xs">
+                                    <span class="font-bold text-slate-200 block">Projected Immediate Debt Burden:</span>
+                                    <span id="debtImpactDesc" class="text-slate-400">₹3 Lakhs to ₹6 Lakhs borrowed from local lenders at exorbitant interest for ICU & final rites.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Heartfelt Reality Callout -->
+                    <div class="mt-6 p-4 rounded-xl bg-red-950/40 border border-red-500/30 text-center">
+                        <p class="text-xs sm:text-sm font-semibold text-red-300 italic" id="calcEmotionalMessage">
+                            "Sirf 2 minute bachaane ke liye kya aap apne bacchon ko sadak par laana chahte hain? Helmet pehno, speed dheemi rakho."
+                        </p>
+                        <a href="#pledge-section" class="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition">
+                            <i data-lucide="heart" class="w-3.5 h-3.5"></i> Take Family Protection Pledge
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: "SUNO UNKI AAWAAZ" - HEARTBREAKING STORIES & MEMORIAL WALL -->
+    <section id="stories-wall" class="py-16 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="heart-crack" class="w-4 h-4"></i> The Human Tragedy Behind Carelessness
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="stories_title">
+                    Suno Unki Awaaz: Ek Chhoti Si Bhool, Ek Poora Parivaar Barbaad
+                </h2>
+                <p class="text-sm text-slate-400 mt-2" data-i18n="stories_desc">
+                    These are real accounts of sole breadwinners who thought "mere sath kuch nahi hoga". Today, their orphaned kids and elderly parents fight for a single meal everyday.
+                </p>
+            </div>
+
+            <!-- Stories Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="storiesContainer">
+                <!-- Dynamically rendered from data.js -->
+            </div>
+
+            <!-- Community Tribute & Safety Memorial Board -->
+            <div class="mt-14 glass-panel rounded-2xl p-6 sm:p-8 border border-white/10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                    <div>
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i data-lucide="flower2" class="w-5 h-5 text-amber-400"></i>
+                            <span data-i18n="memorial_title">Community Remembrance & Safety Memorial Wall</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1" data-i18n="memorial_desc">
+                            Did you lose someone you love to a road accident? Or want to leave a heartfelt message to save another commuter's life? Add your voice here.
+                        </p>
+                    </div>
+
+                    <button id="toggleTributeModalBtn" class="px-4 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black border border-amber-500/40 text-xs font-bold flex items-center gap-2 transition self-start md:self-auto">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Post a Tribute / Safety Voice
+                    </button>
+                </div>
+
+                <!-- Live Memorial Cards Stream -->
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="memorialStream">
+                    <!-- Sample and user-submitted tributes rendered here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: "HUMARA SANKALP" - FAMILY SAFETY PLEDGE & DIGITAL CERTIFICATE -->
+    <section id="pledge-section" class="py-16 bg-slate-950/70 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="award" class="w-4 h-4"></i> National Life-Saver Oath
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="pledge_title">
+                    Humara Sankalp: Family Protection Pledge
+                </h2>
+                <p class="text-sm text-slate-400 mt-2" data-i18n="pledge_desc">
+                    Traffic rules are not for the traffic policeman. They are for your mother, your spouse, and your little child who waits at the gate every evening. Take the oath and generate your digital certificate.
+                </p>
+                <div class="mt-3 inline-flex items-center gap-2 text-xs text-emerald-400 font-bold bg-emerald-950/40 px-3 py-1 rounded-full border border-emerald-500/30">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i> <span id="pledgeCounter">14,938</span> Citizens Have Pledged Their Families' Safety
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Form (5 cols) -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 border border-white/10 space-y-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-2">Pledge Details</h3>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Your Full Name (आपका पूरा नाम):</label>
+                        <input type="text" id="pledgeUserName" class="w-full bg-slate-900 border border-white/10 rounded-xl p-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500" placeholder="e.g. Ramesh Verma">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Dedicate This Pledge To (Family Member):</label>
+                        <input type="text" id="pledgeDedicatedTo" class="w-full bg-slate-900 border border-white/10 rounded-xl p-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500" placeholder="e.g. For my daughter Ananya & my Mother">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Your City / State:</label>
+                        <input type="text" id="pledgeUserCity" class="w-full bg-slate-900 border border-white/10 rounded-xl p-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500" placeholder="e.g. New Delhi">
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">I Solemnly Swear That:</label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300">
+                            <input type="checkbox" checked class="accent-amber-500" id="pledgeCheck1">
+                            <span>I will always wear an ISI certified helmet/seatbelt even for 500m trips.</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300">
+                            <input type="checkbox" checked class="accent-amber-500" id="pledgeCheck2">
+                            <span>I will never touch my phone or scroll social media while driving.</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300">
+                            <input type="checkbox" checked class="accent-amber-500" id="pledgeCheck3">
+                            <span>I will never jump yellow or red traffic signals to save 30 seconds.</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300">
+                            <input type="checkbox" checked class="accent-amber-500" id="pledgeCheck4">
+                            <span>I will never drive under the influence of alcohol or drugs.</span>
+                        </label>
+                    </div>
+
+                    <button id="generateCertificateBtn" class="mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition">
+                        <i data-lucide="file-badge" class="w-4 h-4"></i> Generate Official Certificate
+                    </button>
+                </div>
+
+                <!-- Live Digital Certificate Preview (7 cols) -->
+                <div class="lg:col-span-7 flex flex-col items-center">
+                    <div id="certificateContainer" class="w-full max-w-lg p-6 certificate-frame rounded-lg text-center">
+                        <div class="certificate-inner p-6 rounded border border-amber-500/60 flex flex-col items-center justify-between min-h-[380px]">
+                            <!-- Certificate Header -->
+                            <div>
+                                <div class="text-[10px] uppercase tracking-widest font-black text-red-700">National Road Safety & Family Protection Mission</div>
+                                <h4 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-1 font-serif">CERTIFICATE OF SANKALP</h4>
+                                <p class="text-[11px] text-slate-600 italic">This is to officially honor and certify that</p>
+                            </div>
+
+                            <!-- Pledger Name -->
+                            <div class="my-3 py-2 border-b-2 border-amber-600 w-3/4">
+                                <span class="text-xl sm:text-2xl font-extrabold text-red-900" id="certNameDisplay">Ramesh Verma</span>
+                            </div>
+
+                            <!-- Dedication -->
+                            <p class="text-xs text-slate-700 max-w-md">
+                                has taken a solemn pledge in the loving name of <br>
+                                <strong class="text-red-800 text-sm" id="certDedicationDisplay">"For my daughter Ananya & my Mother"</strong> <br>
+                                to strictly obey all road safety rules, prioritize life over speed, and return home safe every single day.
+                            </p>
+
+                            <!-- Footer Badges -->
+                            <div class="w-full mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-[10px] text-slate-600">
+                                <div class="text-left">
+                                    <span class="block font-bold text-slate-800">Date: <span id="certDateDisplay">22 Oct 2026</span></span>
+                                    <span>Pledge ID: <span id="certIdDisplay" class="font-mono">SS-94821</span></span>
+                                </div>
+
+                                <div class="certificate-seal">
+                                    <i data-lucide="shield-check" class="w-8 h-8 text-amber-200"></i>
+                                </div>
+
+                                <div class="text-right">
+                                    <span class="block font-bold text-slate-800">SurakshaSetu AI</span>
+                                    <span class="text-red-700 font-semibold">Verified Safe Commuter</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificate Action Bar -->
+                    <div class="mt-4 flex flex-wrap gap-3 justify-center w-full max-w-lg">
+                        <button id="downloadCertBtn" class="flex-1 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/20 text-xs font-bold text-white flex items-center justify-center gap-2 transition">
+                            <i data-lucide="download" class="w-4 h-4 text-emerald-400"></i> Download HD Certificate
+                        </button>
+                        <button id="shareWhatsAppBtn" class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white flex items-center gap-2 transition">
+                            <i data-lucide="share-2" class="w-4 h-4"></i> Share on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: GOVERNMENT ACCOUNTABILITY & CITIZEN REPORTING HUB -->
+    <section id="gov-accountability" class="py-16 border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/10 text-purple-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="landmark" class="w-4 h-4"></i> Citizen Grievance & Policy Reform
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white" data-i18n="gov_title">
+                    Government Accountability & Community Action
+                </h2>
+                <p class="text-sm text-slate-400 mt-2" data-i18n="gov_desc">
+                    While citizens must obey rules, governments must be held accountable for dangerous roads, delayed hospital trauma care, and lack of immediate financial support for destitute families.
+                </p>
+            </div>
+
+            <!-- Policy Demands 4 Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12" id="govDemandsContainer">
+                <!-- Dynamically populated from data.js -->
+            </div>
+
+            <!-- Citizen Blackspot & Hazard Reporting Tool -->
+            <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5">
+                        <span class="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 text-xs font-bold uppercase tracking-wider">Citizen Vigilance</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Report a Killer Blackspot or Signal Failure</h3>
+                        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                            Have you spotted a dangerous open pothole, a dead traffic light, or a habitual wrong-side speeding junction? Report it here. Our system drafts an official tweet and grievance notice formatted for the Ministry of Road Transport (@MORTHIndia) and Local Traffic Police.
+                        </p>
+                        <div class="mt-4 p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 text-xs text-purple-200">
+                            <strong>Did you know?</strong> Section 198A of the MV Act holds highway contractors and road authorities criminally liable for fatal crashes caused by design flaws or unattended potholes.
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-[11px] text-slate-400 font-bold block mb-1">Hazard / Violation Type</label>
+                                <select id="hazardType" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2.5 text-xs text-slate-200">
+                                    <option value="Non-Functional Traffic Signal">Broken / Dead Traffic Signal</option>
+                                    <option value="Severe Fatal Pothole / Bad Road">Lethal Pothole / Crater</option>
+                                    <option value="Habitual Wrong-Side Driving">Habitual Wrong-Side Blind Spot</option>
+                                    <option value="Unmarked Speed Breaker">Unpainted Killer Speed Breaker</option>
+                                    <option value="Illegal Road Encroachment">Pedestrian Path Blocked</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-slate-400 font-bold block mb-1">City / Exact Location</label>
+                                <input type="text" id="hazardLocation" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2.5 text-xs text-slate-200" placeholder="e.g. Ring Road Crossing, Near Metro Pillar 140, Delhi">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[11px] text-slate-400 font-bold block mb-1">Describe Danger to Commuters</label>
+                            <textarea id="hazardDesc" rows="2" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2.5 text-xs text-slate-200 placeholder-slate-500" placeholder="e.g. Traffic light has been off for 5 days. Bikes are colliding with speeding trucks every evening..."></textarea>
+                        </div>
+
+                        <button id="submitHazardBtn" class="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i> Generate Official Grievance & Tweet Notice
+                        </button>
+
+                        <div id="hazardNoticeBox" class="hidden mt-3 p-3 rounded-xl bg-slate-900 border border-purple-500/40 text-xs space-y-2">
+                            <p class="font-bold text-purple-300">Generated Public Notice Ready for Social Tagging:</p>
+                            <p id="generatedNoticeText" class="font-mono text-slate-300 text-[11px] bg-slate-950 p-2.5 rounded border border-white/5 select-all"></p>
+                            <a id="tweetNoticeBtn" href="#" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-400 text-white font-bold text-xs">
+                                <i data-lucide="twitter" class="w-3.5 h-3.5"></i> Post Public Tweet to @MORTHIndia
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-slate-950 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex items-center justify-center gap-2">
+                <i data-lucide="shield-alert" class="w-5 h-5 text-red-500"></i>
+                <span class="font-extrabold text-lg text-white">SurakshaSetu AI</span>
+                <span class="text-xs text-slate-500">|</span>
+                <span class="text-xs text-slate-400 font-hindi">एक जीवन, एक परिवार, अनमोल संसार</span>
+            </div>
+            <p class="text-xs text-slate-500 max-w-xl mx-auto">
+                Created to save innocent breadwinners and prevent families from falling into poverty through AI awareness, strict traffic compliance, and emotional responsibility.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-xs text-slate-400 pt-2">
+                <span>Emergency: <strong>112</strong></span>
+                <span>Ambulance: <strong>108</strong></span>
+                <span>Highway Helpline: <strong>1073</strong></span>
+                <span>NHAI Helpline: <strong>1033</strong></span>
+            </div>
+            <p class="text-[11px] text-slate-600 pt-4">© 2026 SurakshaSetu AI Platform. Dedicated to every family waiting by the dinner table.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: EMERGENCY SOS HELPLINES -->
+    <div id="sosModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-red-500/40 relative">
+            <button id="closeSosModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-center gap-3 text-red-500 mb-4">
+                <i data-lucide="phone-call" class="w-7 h-7 animate-pulse"></i>
+                <div>
+                    <h3 class="text-lg font-extrabold text-white">Emergency Road Helplines</h3>
+                    <p class="text-xs text-red-300">Save these numbers on your phone immediately</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <a href="tel:112" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 transition">
+                    <div>
+                        <span class="font-bold text-white block">National Emergency Unified Number</span>
+                        <span class="text-slate-400">Police, Fire & General Rescue</span>
+                    </div>
+                    <span class="text-base font-extrabold text-red-400 font-mono">112</span>
+                </a>
+
+                <a href="tel:108" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 transition">
+                    <div>
+                        <span class="font-bold text-white block">Medical Trauma & Ambulance</span>
+                        <span class="text-slate-400">Free Emergency Medical Transport</span>
+                    </div>
+                    <span class="text-base font-extrabold text-emerald-400 font-mono">108</span>
+                </a>
+
+                <a href="tel:1073" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 transition">
+                    <div>
+                        <span class="font-bold text-white block">National Highway Accident Helpline</span>
+                        <span class="text-slate-400">Immediate Towing & Medical Support</span>
+                    </div>
+                    <span class="text-base font-extrabold text-amber-400 font-mono">1073</span>
+                </a>
+
+                <a href="tel:1033" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 transition">
+                    <div>
+                        <span class="font-bold text-white block">NHAI Expressways Emergency</span>
+                        <span class="text-slate-400">Tollways & Expressways Rescue</span>
+                    </div>
+                    <span class="text-base font-extrabold text-blue-400 font-mono">1033</span>
+                </a>
+            </div>
+
+            <p class="text-[11px] text-slate-400 mt-4 text-center">
+                <strong>Golden Hour Rule:</strong> An accident victim provided medical treatment within 60 minutes has an 80% higher survival rate.
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD COMMUNITY TRIBUTE -->
+    <div id="tributeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-amber-500/30 relative">
+            <button id="closeTributeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
+                <i data-lucide="flower2" class="w-5 h-5 text-amber-400"></i>
+                <span>Leave a Memorial or Safety Voice</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">Honor someone lost or post a message to caution your fellow citizens.</p>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="text-[11px] text-slate-300 font-bold block mb-1">Your Name</label>
+                    <input type="text" id="tributeAuthor" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2.5 text-xs text-slate-100" placeholder="e.g. Suman Gupta">
+                </div>
+
+                <div>
+                    <label class="text-[11px] text-slate-300 font-bold block mb-1">In Memory Of (Optional) or Safety Topic</label>
+                    <input type="text" id="tributeDedicated" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2.5 text-xs text-slate-100" placeholder="e.g. My late brother Rahul (Lost to speeding truck)">
+                </div>
+
+                <div>
+                    <label class="text-[11px] text-slate-300 font-bold block mb-1">Your Message to Society</label>
+                    <textarea id="tributeContent" rows="3" class="w-full bg-slate-900 border border-white/10 rounded-lg p-2.5 text-xs text-slate-100" placeholder="e.g. Please wear a helmet. My brother was only 22. My mother still cries every day. Save your family from this pain..."></textarea>
+                </div>
+
+                <button id="submitTributeBtn" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider transition">
+                    Publish to Memorial Wall
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
